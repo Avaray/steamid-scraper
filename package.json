@@ -3,14 +3,19 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec \"bun run index.ts\" --watch index.ts"
+    "servers": "nodemon --exec \"bun run servers.ts\" --watch servers.ts",
+    "friends": "nodemon --exec \"bun run friends.ts\" --watch friends.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/bun": "latest",
+    "@types/gamedig": "^5.0.3",
     "@types/node": "^22.3.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "gamedig": "^5.1.1"
   }
 }
