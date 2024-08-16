@@ -24,4 +24,4 @@ But this approach is not good because:
 
 ### Third idea (unrealized yet):
 
-I'm thinking about GitHub actions. I could create a GitHub action that would run every day and get list of X amount of SteamIDs. Script will upodate the list of SteamIDs in the repository. List will grow every day.
+I'm thinking about GitHub actions. I could create a GitHub action that would run every day and get list of X amount of SteamIDs. Script will upodate the list of SteamIDs in the repository. List will grow every day. List will start from #1 and go up to infinity.
