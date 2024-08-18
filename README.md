@@ -11,6 +11,7 @@ The only big issue is that it saves IDs into one single file. I need to change i
 2. We get friends of this SteamID.
 3. We get friends of friends of this SteamID.
 4. And so on, until we have enough SteamIDs.
+5. Script is getting IDs first, then it is checking if they are valid (if they exist and are public).
 
 ## Requirements
 
