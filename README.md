@@ -1,6 +1,8 @@
 # 👾 Steam Community ID Scraper
 
-I created it spontaneously because I needed a huge amount of valid SteamIDs for testing my another project. **I recommend not collecting or sharing** the generated SteamID databases. Use this tool for educational purposes only. As the creator of this tool, I am not responsible for its use.
+I created it spontaneously because I needed a huge amount of valid SteamIDs for testing my another project.  
+**I recommend not collecting or sharing** the generated SteamID databases.  
+Use this tool for educational purposes only. As the creator of this tool, I am not responsible for its use.
 
 This scraper is not finished yet, but it works.  
 The only big issue is that it saves IDs into one single file. I need to change it in first place.
@@ -9,9 +11,9 @@ The only big issue is that it saves IDs into one single file. I need to change i
 
 1. First we start with at least one valid SteamID.
 2. We get friends of this SteamID.
-3. We get friends of friends of this SteamID.
+3. We get friends of friends of friends.
 4. And so on, until we have enough SteamIDs.
-5. Script is getting IDs first, then it is checking if they are valid (if they exist and are public).
+5. Script is also checking if profiles are public and if they exist at all.
 
 ## Requirements
 
