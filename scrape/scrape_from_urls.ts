@@ -1,4 +1,4 @@
-let scrapedIds = [] as string[];
+const scrapedIds = {} as { [key: string]: boolean };
 const start = Date.now();
 import urls from './urls_to_scrape';
 
@@ -9,8 +9,8 @@ const scrape = async (url: string) => {
     const ids = text.match(/\d{17}/gm);
     if (ids) {
       for (const id of ids) {
-        if (!scrapedIds.includes(id)) {
-          scrapedIds.push(id);
+        if (!scrapedIds[id]) {
+          scrapedIds[id] = true;
         }
       }
     }
@@ -32,6 +32,4 @@ if (urls.length) {
 
 console.log(`Scraped ${scrapedIds.length} ids in ${((Date.now() - start) / 1000).toFixed(2)} seconds`);
 
-scrapedIds = [...new Set(scrapedIds)].sort();
-
-await Bun.write('../scraped_ids.json', JSON.stringify(scrapedIds, null, 2));
+await Bun.write('../ids_.json', JSON.stringify(scrapedIds, null, 2));
