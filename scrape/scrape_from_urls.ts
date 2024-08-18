@@ -1,6 +1,7 @@
+import urls from './urls_to_scrape';
+
 const scrapedIds = {} as { [key: string]: boolean };
 const start = Date.now();
-import urls from './urls_to_scrape';
 
 const scrape = async (url: string) => {
   try {
@@ -10,11 +11,13 @@ const scrape = async (url: string) => {
     if (ids) {
       for (const id of ids) {
         if (!scrapedIds[id]) {
-          scrapedIds[id] = true;
+          scrapedIds[id] = false;
         }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 if (urls.length) {
@@ -22,14 +25,15 @@ if (urls.length) {
     console.log(`Scraping ${url}`);
     await scrape(url);
   }
-  // This page has 200 pages of backpacks (20000 entries)
   const backpacksUrl = 'https://backpack.tf/top/backpacks/';
   for (let i = 1; i < 201; i++) {
     console.log(`Scraping ${backpacksUrl}${i}`);
     await scrape(`${backpacksUrl}${i}`);
   }
+} else {
+  console.log('No URLs to scrape');
 }
 
-console.log(`Scraped ${scrapedIds.length} ids in ${((Date.now() - start) / 1000).toFixed(2)} seconds`);
+console.log(`Scraped ${scrapedIds.length} IDs in ${((Date.now() - start) / 1000).toFixed(2)} seconds`);
 
 await Bun.write('../ids_.json', JSON.stringify(scrapedIds, null, 2));
