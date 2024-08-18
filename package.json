@@ -1,11 +1,7 @@
 {
-  "name": "steam-ids-list-generator",
+  "name": "steamid-scraper",
   "module": "index.ts",
   "type": "module",
-  "scripts": {
-    "servers": "nodemon --exec \"bun run servers.ts\" --watch servers.ts",
-    "friends": "nodemon --exec \"bun run friends.ts\" --watch friends.ts"
-  },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/bun": "latest",
