@@ -22,6 +22,6 @@ But this approach is not good because:
 - Uses too many unnecessary requests
 - The more SteamIDs I have the less new SteamIDs I get
 
-### Third idea (unrealized yet):
+### Third idea (current one):
 
-I'm thinking about GitHub actions. I could create a GitHub action that would run every day and get list of X amount of SteamIDs. Script will upodate the list of SteamIDs in the repository. List will grow every day. List will start from #1 and go up to infinity.
+I will use GitHub actions. Script will run every day and get list of X amount of SteamIDs. Script will upodate the list of SteamIDs in the repository. List will grow every day. The only downside is that I follow friends of friends. This is slower than starting from first possible ID, but in this way I will get real people.
