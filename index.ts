@@ -1,11 +1,25 @@
-// I stopped in middle of work on this script
-// It was supposed to extract friends of friends from Steam API
+// import { readdir } from 'node:fs/promises';
+// import { join } from 'node:path';
+import config from './config';
 
 const key = Bun.env.STEAM_API_KEY;
 
-import config from './config';
+if (!key) {
+  console.error('STEAM_API_KEY is not set');
+  process.exit(1);
+}
 
-console.log(`Loaded config with ${config.idsLimit} IDs limit and ${config.dailyRequestsLimit} requests limit`);
+console.log(
+  `Loaded config${config.idsLimit ? ` with ${config.idsLimit} IDs limit and ` : ' with '}${
+    config.dailyRequestsLimit
+  } requests limit`,
+);
+
+// This code is for future code refactorization
+// I need to re-think the whole logic of the script
+// let ids = [] as Id[];
+// const files = await readdir(join(import.meta.dir, 'database'));
+// console.log(`Found ${files.length} files in ${join(import.meta.dir, 'database')}`);
 
 type Id = { [id: string]: boolean };
 const idsFilePath = 'ids.json';
@@ -46,7 +60,7 @@ async function extractIds(id: string) {
     return;
   }
 
-  if (requests >= possibleRequests) {
+  if (requests >= requestsLeft()) {
     console.log(`Reached requests limit of ${config.dailyRequestsLimit}`);
     await finish();
   }
@@ -61,6 +75,9 @@ async function extractIds(id: string) {
     if (response.status === 200) {
       ids[id] = true;
       data = await response.json();
+    } else if (response.status === 401) {
+      console.error('Unauthorized');
+      return;
     } else {
       return;
     }
@@ -71,7 +88,6 @@ async function extractIds(id: string) {
       steamid: string;
     }
 
-    // create new array of IDs that are not in ids and in blacklist
     const newFriends = data.friendslist.friends.filter(
       (friend: Friend) => !ids[friend.steamid] && !blacklist.includes(friend.steamid),
     );
@@ -89,7 +105,6 @@ async function extractIds(id: string) {
 }
 
 // Sum of requests in past 24 hours
-// I think this function is not working properly
 const requestsInPast24Hours = () => {
   return runs
     .filter((run) => run.timestamp > Date.now() - 24 * 60 * 60 * 1000)
@@ -143,14 +158,12 @@ async function finish() {
   process.exit(0);
 }
 
-const possibleRequests = requestsLeft();
-
 if (!ableToMakeRequests()) {
   console.log(`Reached daily requests limit of ${config.dailyRequestsLimit}`);
   process.exit(0);
 } else {
   console.log(`Requests in past 24 hours: ${requestsInPast24Hours()}`);
-  console.log(`Possible to make ${possibleRequests} requests`);
+  console.log(`Possible to make ${requestsLeft()} requests`);
 }
 
 process.on('SIGINT', async () => {
@@ -160,6 +173,8 @@ process.on('SIGINT', async () => {
 process.on('SIGTERM', async () => {
   await finish();
 });
+
+console.log('Running...');
 
 for (const id of Object.keys(ids)) {
   if (blacklist.includes(id)) {
