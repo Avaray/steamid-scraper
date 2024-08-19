@@ -1,7 +1,8 @@
 # 👾 Steam Community ID Scraper
 
-I created it spontaneously because I needed a huge amount of valid SteamIDs for testing my another project.  
-**I recommend not collecting or sharing** the generated SteamID databases.  
+I created it spontaneously because I needed a huge amount of valid SteamIDs for testing my another project.
+
+**I recommend not collecting or sharing the generated SteamID databases.**  
 Use this tool for educational purposes only. As the creator of this tool, I am not responsible for its use.
 
 This scraper is not finished yet, but it works.  
