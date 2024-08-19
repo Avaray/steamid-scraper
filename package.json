@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec 'bun run index.ts' --watch index.ts config.ts "
+    "dev": "nodemon --exec 'bun run index.ts' --watch index.ts config.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
