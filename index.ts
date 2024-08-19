@@ -67,7 +67,7 @@ async function extractIds(id: string) {
 
   try {
     requests++;
-    const response = await fetch(url);
+    const response = await fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
     let data = null;
 
     if (response.status === 500 || response.status === 404) avoidId(id);
@@ -150,7 +150,7 @@ async function finish() {
   }
   try {
     console.log(`Writing blacklist to ${blacklistFilePath} file`);
-    await Bun.write('blacklist.json', JSON.stringify(blacklist, null, 2));
+    await Bun.write('blacklist.json', `${JSON.stringify(blacklist, null, 2)}\n`);
   } catch (error) {
     console.error(error);
   }
