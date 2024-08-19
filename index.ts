@@ -70,7 +70,7 @@ async function extractIds(id: string) {
     const response = await fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
     let data = null;
 
-    if (response.status === 500 || response.status === 404) avoidId(id);
+    [500, 404, 401].includes(response.status) && avoidId(id);
 
     if (response.status === 200) {
       ids[id] = true;
