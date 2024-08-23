@@ -23,7 +23,7 @@ The only big issue is that it saves IDs into one single file. I need to change i
 
 ## Usage
 
-1. You need to clone this repository.
+1. You need to [clone](https://git-scm.com/docs/git-clone/en) or [download](https://github.com/Avaray/steamid-scraper/archive/refs/heads/main.zip) this repository.
 2. Set `STEAM_API_KEY` in `.env` file.
 3. Run `bun install` in root directory to install dependencies.
 4. Run `bun run scrape_from_urls.ts` in `/scraper` directory. It will create list of about 10k SteamIDs. That will be enough for the beginning. File will be saved in root directory with name `ids_.json`. Then rename it manually to `ids.json`.
